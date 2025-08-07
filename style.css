@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  background: #0F0F0F;
+  color: #F8F8F8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.dynamic-title {
+  font-size: 3em;
+  color: #00FFFF;
+  text-align: center;
+  animation: h1Pulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes h1Pulse {
+  0% {
+    text-shadow: 0 0 10px #00FFFF, 0 0 25px #00FFFF33;
+  }
+  100% {
+    text-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF88;
+  }
+}
+
+h2 {
+  font-size: 1.8em;
+  color: #5CD5FF;
+  animation: h2Glow 3s ease-in-out infinite alternate;
+  margin-bottom: 20px;
+}
+
+@keyframes h2Glow {
+  0% {
+    text-shadow: 0 0 5px #5CD5FF, 0 0 10px #5CD5FF33;
+  }
+  100% {
+    text-shadow: 0 0 10px #5CD5FF, 0 0 20px #5CD5FF55;
+  }
+}
+
+.lead {
+  font-size: 1.3em;
+  color: #CCCCCC;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+p, li {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #E0E0E0;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.cta {
+  background: linear-gradient(135deg, #00FFFF, #9B30FF);
+  color: #0F0F0F;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1em;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 20px #00FFFF99;
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background: linear-gradient(135deg, #9B30FF, #00FFFF);
+  box-shadow: 0 0 30px #9B30FFaa;
+  color: #fff;
+}
+
+[data-scroll] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 60px;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+  color: #777;
+}
+
+footer a {
+  color: #00FFFF;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .dynamic-title {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  .cta {
+    font-size: 1em;
+    padding: 12px 20px;
+  }
+}
