@@ -4,76 +4,336 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Автоквест Сухум</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ======== СТИЛИ ======== */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #121212;
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 15px 60px;
+    }
+
+    header.intro {
+      text-align: center;
+      padding: 60px 20px 40px;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    header.intro h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #90caf9;
+      position: relative;
+      animation: glowText 3s ease-in-out infinite alternate;
+    }
+
+    header.intro .lead {
+      font-size: 1.25em;
+      margin-bottom: 20px;
+      color: #bbdefb;
+    }
+
+    header.intro p {
+      max-width: 650px;
+      margin: 0 auto 15px;
+      line-height: 1.6;
+      color: #ddd;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section {
+      margin: 50px 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section h2 {
+      font-size: 1.8em;
+      color: #64b5f6;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 8px;
+      animation: glowUnderline 3s ease-in-out infinite alternate;
+    }
+
+    /* Подчёркивание под заголовками */
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 60px;
+      background: #42a5f5;
+      border-radius: 2px;
+      transition: background 0.3s ease;
+    }
+
+    ul {
+      padding-left: 25px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: #42a5f5;
+      color: #121212;
+      font-weight: 700;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-top: 30px;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      box-shadow: 0 0 15px rgba(66, 165, 245, 0.5);
+      animation: pulseButton 2.5s infinite ease-in-out;
+    }
+
+    .cta:hover {
+      background: #64b5f6;
+      color: #fff;
+      box-shadow: 0 0 25px rgba(100, 181, 246, 0.8);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    footer a {
+      color: #64b5f6;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #90caf9;
+    }
+
+    /* Отдельные блоки под футером */
+    .footer-section {
+      margin-top: 40px;
+      color: #bbb;
+    }
+
+    .footer-section h3 {
+      color: #64b5f6;
+      margin-bottom: 10px;
+      font-size: 1.3em;
+      position: relative;
+      padding-bottom: 5px;
+      animation: glowUnderline 3s ease-in-out infinite alternate;
+    }
+
+    .footer-section a {
+      color: #90caf9;
+      text-decoration: none;
+      word-break: break-all;
+      display: inline-block;
+      margin-top: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: #bbdefb;
+    }
+
+    /* Анимации */
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glowText {
+      0% {
+        text-shadow: 0 0 6px #64b5f6, 0 0 10px #42a5f5, 0 0 20px #2196f3;
+      }
+      100% {
+        text-shadow: 0 0 14px #90caf9, 0 0 25px #64b5f6, 0 0 35px #42a5f5;
+      }
+    }
+
+    @keyframes glowUnderline {
+      0% {
+        background-color: #42a5f5;
+        box-shadow: 0 0 6px #42a5f5;
+      }
+      100% {
+        background-color: #90caf9;
+        box-shadow: 0 0 15px #90caf9;
+      }
+    }
+
+    @keyframes pulseButton {
+      0%, 100% {
+        box-shadow: 0 0 15px rgba(66, 165, 245, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(100, 181, 246, 0.8);
+      }
+    }
+
+    /* Анимация плавного появления текста при скролле */
+    .fade-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Адаптив */
+    @media (max-width: 480px) {
+      header.intro h1 {
+        font-size: 2.2em;
+      }
+
+      section h2 {
+        font-size: 1.5em;
+      }
+
+      .container {
+        padding: 15px 10px 40px;
+      }
+
+      .cta {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <div class="container">
-    <header class="intro" data-scroll>
-      <h1 class="dynamic-title">Автоквест в Сухуме</h1>
-      <p class="lead">Первый интеллектуальный автоквест в Абхазии — исследуй город, решай загадки и выигрывай приз!</p>
+
+    <header class="intro fade-scroll">
+      <h1>Автоквест в Сухуме</h1>
+      <p class="lead">Первый автоквест в Абхазии — исследуй город, решай загадки и соревнуйся за приз!</p>
+      <p>
+        Автоквест — это интеллектуальная приключенческая игра на автомобиле. Ваша команда будет передвигаться по Сухуму, разгадывая подсказки и находя следующие локации. Побеждает та команда, которая первой доберётся до финиша — там вас ждёт приз!
+      </p>
+      <p>
+        Всё, что нужно: собрать команду из 2–4 человек, иметь заправленный автомобиль и быть готовыми к приключениям. Игра проходит по выходным с 20:00 до 23:00, участие — 1000₽ с команды. Все маршруты продуманы и безопасны. Администратор всегда на связи, а один участник от каждой команды будет добавлен в чат игры.
+      </p>
+      <p>
+        Вас ждут эмоции, азарт и новые игровые механики с каждым запуском. Подходит для тех, кто любит загадки, городские приключения и драйв!
+      </p>
     </header>
 
-    <section data-scroll>
+    <section class="fade-scroll">
       <h2>О проекте</h2>
-      <p>Автоквест — это приключенческая игра на автомобиле по городу Сухум. Команды из 2–4 человек решают загадки, чтобы перейти от одной локации к другой. Побеждает команда, первой дошедшая до финала, где её ждёт приз.</p>
-      <p>Все маршруты проходят в пределах города, в безопасных точках под контролем администраторов. Каждая игра — это новые впечатления, эмоции и драйв.</p>
+      <p>Автоквест — это квест на машине по городу Сухум. В каждой локации вас ждёт загадка, ведущая к следующей точке. Команда, которая первой доберётся до финала, получает приз!</p>
     </section>
 
-    <section data-scroll>
+    <section class="fade-scroll">
       <h2>Правила участия</h2>
       <ul>
         <li>Команда: 2–4 человека</li>
         <li>Наличие заправленного автомобиля обязательно</li>
-        <li><strong>Игра — не гонка</strong>. Обязательно соблюдение ПДД!</li>
-        <li>Нарушение скоростного режима = моментальная дисквалификация</li>
-        <li>Контроль соблюдения ПДД осуществляется через специальное приложение</li>
-        <li>Участие: 1000 ₽ с команды</li>
-        <li>Игра проходит по выходным, с 20:00 до 23:00</li>
-        <li>Максимум — 10 команд в одной игре</li>
-        <li>Один участник из команды добавляется в чат с администратором</li>
+        <li>Участие платное: 1000 ₽ с команды</li>
+        <li>Всего 10 команд</li>
+        <li>Игра проходит в тестовом (бета) режиме</li>
+        <li>Обязательно соблюдение ПДД — это интеллектуальная игра, а не гонки</li>
+        <li>За нарушение скоростного режима — моментальная дисквалификация</li>
+        <li>Контроль игры осуществляется специальным приложением</li>
       </ul>
     </section>
 
-    <section data-scroll>
+    <section class="fade-scroll">
       <h2>Приз</h2>
-      <p>Приз — приятный сюрприз, а также море впечатлений и заряд энергии. Подробности не раскрываются заранее — пусть это будет интрига!</p>
+      <p>Приз — приятный сюрприз для победителей. А ещё море впечатлений и драйв!</p>
     </section>
 
-    <section data-scroll>
+    <section class="fade-scroll">
       <h2>Формат игры</h2>
-      <p>Каждая игра состоит из 5–7 локаций. В каждой из них команда решает загадку, чтобы узнать следующую точку маршрута. Полное прохождение занимает от 2 до 3 часов.</p>
+      <p>Квест состоит из 5–7 локаций. В каждой вы находите подсказку на следующую. Вся игра занимает около 2–3 часов.</p>
     </section>
 
-    <section data-scroll>
+    <section class="fade-scroll">
       <h2>Как забронировать?</h2>
-      <p>Нажмите кнопку ниже и напишите нам в Telegram. Мы подтвердим участие и отправим инструкции.</p>
+      <p>Нажмите кнопку внизу и напишите нам в Telegram. Мы подтвердим участие и дадим дальнейшие инструкции.</p>
+    </section>
+
+    <footer>
       <a href="https://t.me/your_telegram_link" class="cta">Забронировать участие</a>
-    </section>
 
-    <section data-scroll>
-      <h2>Отзывы</h2>
-      <p>Почитайте реальные впечатления участников:</p>
-      <a href="https://t.me/your_channel/123" class="cta" target="_blank">Читать отзывы в Telegram</a>
-    </section>
+      <div class="footer-section">
+        <h3>Отзывы</h3>
+        <p>Читайте отзывы участников в нашем Telegram-канале:</p>
+        <a href="https://t.me/your_telegram_link" target="_blank" rel="noopener">https://t.me/your_telegram_link</a>
+      </div>
 
-    <section data-scroll>
-      <h2>Подписывайтесь</h2>
-      <p>Наш Telegram-канал с новостями и анонсами игр:</p>
-      <a href="https://t.me/your_channel" class="cta" target="_blank">Перейти в канал</a>
-    </section>
+      <div class="footer-section">
+        <h3>Наш канал</h3>
+        <a href="https://t.me/your_telegram_link" target="_blank" rel="noopener">@your_telegram</a>
+      </div>
 
-    <section data-scroll>
-      <h2>Связаться с поддержкой</h2>
-      <p>Есть вопросы? Напишите нам — мы на связи!</p>
-      <a href="https://t.me/your_support_bot" class="cta" target="_blank">Поддержка в Telegram</a>
-    </section>
+      <div class="footer-section">
+        <h3>Связаться с поддержкой</h3>
+        <a href="https://t.me/your_telegram_link" target="_blank" rel="noopener">Написать в Telegram</a>
+      </div>
 
-    <footer data-scroll>
-      <p>© 2025 Автоквест Сухум | Telegram: <a href="https://t.me/your_telegram_link">@your_telegram</a></p>
+      <p>© 2025 Автоквест Сухум</p>
     </footer>
+
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // ======== СКРИПТ ДЛЯ АНИМАЦИИ ПРИ СКРОЛЛЕ ========
+    function onEntry(entry) {
+      entry.forEach(change => {
+        if (change.isIntersecting) {
+          change.target.classList.add('visible');
+        }
+      });
+    }
+
+    let options = { threshold: [0.1] };
+    let observer = new IntersectionObserver(onEntry, options);
+    let elements = document.querySelectorAll('.fade-scroll');
+
+    elements.forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
 </body>
 </html>
